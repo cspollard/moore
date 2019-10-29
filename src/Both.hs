@@ -14,12 +14,11 @@ import Data.Bifunctor.Biff
 import Data.Bifunctor.Tannen
 import Data.Profunctor
 import Control.Lens hiding ((<.>))
-import Data.Functor.Identity
 import Data.Functor.Apply
 import Data.Functor.Bind
 
 
-data Both a b = Both !a !b deriving (Generic, Show)
+data Both a b = Both !a !b deriving (Generic, Show, Functor, Foldable, Traversable)
 
 
 instance (Semigroup a, Semigroup b) => Semigroup (Both a b) where
@@ -46,10 +45,6 @@ instance Biapplicative Both where
   Both f g <<*>> Both a b = Both (f a) (g b)
   {-# INLINE (<<*>>)  #-}
 
-
-instance Functor (Both a) where
-  fmap = second
-  {-# INLINE fmap  #-}
 
 instance Semigroup s => Apply (Both s) where
   Both s f <.> Both t x = Both (s <> t) (f x)

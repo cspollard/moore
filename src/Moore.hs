@@ -20,7 +20,7 @@ module Moore
 import Prelude hiding (id, (.))
 import Data.Foldable (foldlM)
 import Data.Profunctor hiding (curry')
-import Optic (starry, Optic')
+import Optic (Optic')
 import Data.Functor.Identity
 import Control.Category
 import Control.Arrow
