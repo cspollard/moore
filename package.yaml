@@ -36,6 +36,7 @@ dependencies:
 - bifunctors
 - lens
 - semigroupoids
+- cereal
 
 library:
   source-dirs: src

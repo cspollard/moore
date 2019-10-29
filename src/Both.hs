@@ -16,9 +16,12 @@ import Data.Profunctor
 import Control.Lens hiding ((<.>))
 import Data.Functor.Apply
 import Data.Functor.Bind
+import Data.Serialize
 
 
 data Both a b = Both !a !b deriving (Generic, Show, Functor, Foldable, Traversable)
+
+instance (Serialize a, Serialize b) => Serialize (Both a b) where
 
 
 instance (Semigroup a, Semigroup b) => Semigroup (Both a b) where
@@ -121,8 +124,10 @@ data Either' a b
   | Right' !b
   deriving (Generic, Show)
 
-
 makePrisms ''Either'
+
+instance (Serialize a, Serialize b) => Serialize (Either' a b) where
+
 
 instance Bitraversable Either' where
   bitraverse f _ (Left' a) = Left' <$> f a
